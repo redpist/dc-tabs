@@ -82,10 +82,10 @@ export default Ember.Component.extend({
     var index = tab.get('index');
     var parent = this.get('parentView');
     tabs.removeObject(tab);
-    if (parent.get('activeTab') == tab) {
+    if (parent.get('activeTab') === tab) {
       if (tabs.get('length') === 0) return;
-      var index = (index === 0) ? index : index - 1;
-      var tab = tabs.objectAt(index);
+      index = (index === 0) ? index : index - 1;
+      tab = tabs.objectAt(index);
       parent.select(tab);
     }
   },
@@ -99,9 +99,9 @@ export default Ember.Component.extend({
 
   navigateOnKeyDown: function(event) {
     var key = event.keyCode;
-    if (key == 37 /*<*/ || key == 38 /*^*/) {
+    if (key === 37 /*<*/ || key === 38 /*^*/) {
       this.selectPrevious();
-    } else if (key == 39 /*>*/ || key == 40 /*v*/) {
+    } else if (key === 39 /*>*/ || key === 40 /*v*/) {
       this.selectNext();
     } else {
       return;
@@ -129,7 +129,7 @@ export default Ember.Component.extend({
 
   selectNext: function() {
     var index = this.get('activeTabIndex') + 1;
-    if (index == this.get('tabs.length')) { index = 0; }
+    if (index === this.get('tabs.length')) { index = 0; }
     this.selectTabAtIndex(index);
   },
 
@@ -142,7 +142,7 @@ export default Ember.Component.extend({
 
   selectPrevious: function() {
     var index = this.get('activeTabIndex') - 1;
-    if (index == -1) { index = this.get('tabs.length') - 1; }
+    if (index === -1) { index = this.get('tabs.length') - 1; }
     this.selectTabAtIndex(index);
   },
 
