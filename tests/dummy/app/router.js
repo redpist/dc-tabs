@@ -6,6 +6,9 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('simple');
+  this.route('dynamic');
+  this.route('query-params');
 });
 
 export default Router;

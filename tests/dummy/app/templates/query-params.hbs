@@ -1,0 +1,100 @@
+<h1>Query Params</h1>
+<ul>
+  <li>Requires the <code>query-params-new</code> feature flag on current ember-canary
+  <li>state is persisted to the query params, refresh to see it in action
+</ul>
+
+<div class="demo">
+  {{#dc-tabs selected-index=country}}
+    {{#dc-tab-list}}
+      {{#dc-tab}}USA{{/dc-tab}}
+      {{#dc-tab}}Japan{{/dc-tab}}
+      {{#dc-tab}}Texas{{/dc-tab}}
+    {{/dc-tab-list}}
+
+    {{#dc-tab-panel}}
+      <h2>USA</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    {{/dc-tab-panel}}
+
+    {{#dc-tab-panel}}
+      <h2>Japan</h2>
+      <p>
+        Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    {{/dc-tab-panel}}
+
+    {{#dc-tab-panel}}
+      <h2>Texas</h2>
+      <p>
+        Veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+        Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.
+      </p>
+    {{/dc-tab-panel}}
+  {{/dc-tabs}}
+</div>
+
+
+<div class="demo">
+  {{#dc-tabs selected-index=food}}
+    {{#dc-tab-list}}
+      {{#dc-tab}}Hamburger{{/dc-tab}}
+      {{#dc-tab}}Noodles{{/dc-tab}}
+      {{#dc-tab}}Toast{{/dc-tab}}
+    {{/dc-tab-list}}
+
+    {{#dc-tab-panel}}
+      <h2>Hamburger</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    {{/dc-tab-panel}}
+
+    {{#dc-tab-panel}}
+      <h2>Noodles</h2>
+      <p>
+        Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    {{/dc-tab-panel}}
+
+    {{#dc-tab-panel}}
+      <h2>Toast</h2>
+      <p>
+        Veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+        Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.
+      </p>
+    {{/dc-tab-panel}}
+  {{/dc-tabs}}
+</div>

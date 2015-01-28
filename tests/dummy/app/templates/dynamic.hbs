@@ -1,0 +1,42 @@
+<h1>Dynamic</h1>
+<ul>
+  <li>TODO: make this demo more accessible</li>
+</ul>
+
+<p>
+  Change to the index of the tab to select: {{input size=2 type="number" value=selectedTabIndex}}
+</p>
+
+{{#dc-tabs selected-index=selectedTabIndex}}
+  {{#dc-tab-list}}
+    {{#each tab in tabs}}
+      {{#dc-tab}}
+        <b>{{tab.name}}</b>
+        <button {{action "removeTab" tab}}>×</button>
+      {{/dc-tab}}
+    {{/each}}
+    <button {{action "editNewTab"}}>add a tab</button>
+  {{/dc-tab-list}}
+
+  {{#each tab in tabs}}
+    {{#dc-tab-panel}}
+      <p>{{tab.description}}</p>
+    {{/dc-tab-panel}}
+  {{/each}}
+{{/dc-tabs}}
+
+{{#if adding}}
+  <form id="addTabForm" {{action "saveNewTab" on="submit"}}>
+    <p>
+       <label for="name">Tab Label:</label><br>
+       {{input value=newTab.name}}
+    </p>
+    <p>
+      <label for="description">Tab Description:</label><br>
+      {{textarea value=newTab.description}}
+    </p>
+    <p>
+      <button type="submit">save</button>
+    </p>
+  </form>
+{{/if}}
