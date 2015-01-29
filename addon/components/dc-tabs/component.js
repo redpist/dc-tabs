@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-  tagName: 'ic-tabs',
+  tagName: 'dc-tabs',
 
   /**
    * The selected TabComponent instance.

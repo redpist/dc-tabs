@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-  tagName: 'ic-tab-list',
+  tagName: 'dc-tab-list',
 
   attributeBindings: [
     'role',

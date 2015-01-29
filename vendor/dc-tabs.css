@@ -1,14 +1,14 @@
-ic-tabs,
-ic-tab-list,
-ic-tab-panel {
+dc-tabs,
+dc-tab-list,
+dc-tab-panel {
   display: block;
 }
 
-ic-tab-list {
+dc-tab-list {
   border-bottom: 1px solid #aaa;
 }
 
-ic-tab {
+dc-tab {
   display: inline-block;
   padding: 6px 12px;
   border: 1px solid transparent;
@@ -19,12 +19,12 @@ ic-tab {
   position: relative;
 }
 
-ic-tab[selected] {
+dc-tab[selected] {
   border-color: #aaa;
   border-bottom-color: #fff;
 }
 
-ic-tab:focus {
+dc-tab:focus {
   box-shadow: 0 10px 0 0 #fff,
               0 0 5px hsl(208, 99%, 50%);
   border-color: hsl(208, 99%, 50%);
@@ -32,8 +32,8 @@ ic-tab:focus {
   outline: none;
 }
 
-ic-tab:focus:before,
-ic-tab:focus:after {
+dc-tab:focus:before,
+dc-tab:focus:after {
   content: '';
   position: absolute;
   bottom: -6px;
@@ -42,14 +42,14 @@ ic-tab:focus:after {
   background: #fff;
 }
 
-ic-tab:focus:before {
+dc-tab:focus:before {
   left: -4px;
 }
 
-ic-tab:focus:after {
+dc-tab:focus:after {
   right: -4px;
 }
 
-ic-tab-panel.active {
+dc-tab-panel.active {
   display: block;
 }
