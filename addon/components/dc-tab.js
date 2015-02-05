@@ -177,7 +177,7 @@ export default Ember.Component.extend({
 
   registerWithTabList: function() {
     this.get('tabList').registerTab(this);
-  }.on('didInsertElement'),
+  }.on('willInsertElement'),
 
   unregisterWithTabList: function() {
     this.get('tabList').unregisterTab(this);
