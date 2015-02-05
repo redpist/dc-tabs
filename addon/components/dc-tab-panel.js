@@ -64,7 +64,7 @@ export default Ember.Component.extend({
     var index = this.get('tabPanels').indexOf(this);
     var tabs = this.get('tabList.tabs');
     return tabs && tabs.objectAt(index);
-  }.property('tabList.tabs.@each'),
+  }.property('tabList.tabs.@each', 'tabPanels.@each'),
 
   /**
    * Tells whether or not this panel is active.
