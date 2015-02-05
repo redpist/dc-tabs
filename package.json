@@ -1,6 +1,6 @@
 {
   "name": "dc-tabs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Tab addon for ember.js",
   "directories": {
     "doc": "doc",
