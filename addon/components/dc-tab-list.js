@@ -82,12 +82,6 @@ export default Ember.Component.extend({
     var index = tab.get('index');
     var parent = this.get('parentView');
     tabs.removeObject(tab);
-    if (parent.get('activeTab') === tab) {
-      if (tabs.get('length') === 0) return;
-      index = (index === 0) ? index : index - 1;
-      tab = tabs.objectAt(index);
-      parent.select(tab);
-    }
   },
 
   /**
