@@ -51,8 +51,9 @@ export default Ember.Component.extend({
    */
 
   select: function(tab) {
+    var tabIndex = tab.get('custom-index') || tab.get('index');
     this.set('activeTab', tab);
-    this.set('selected-index', tab.get('index')); // TODO: Change to binding
+    this.set('selected-index', tabIndex);
   },
 
   /**

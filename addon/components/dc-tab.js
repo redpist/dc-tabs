@@ -161,9 +161,10 @@ export default Ember.Component.extend({
   selectFromTabsSelectedIndex: function() {
     var activeTab = this.get('tabs.activeTab');
     if (activeTab === this) return; // this was just selected
+    var selectedIndex = this.get('tabs.selected-index');
     var index = parseInt(this.get('tabs.selected-index'), 10);
     var myIndex = this.get('index');
-    if (index === myIndex) {
+    if (index === myIndex || (this.get('custom-index') && this.get('custom-index') === selectedIndex)) {
       this.select();
     }
   }.observes('tabs.selected-index').on('didInsertElement'),
