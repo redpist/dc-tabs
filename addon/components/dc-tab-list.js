@@ -53,17 +53,8 @@ export default Ember.Component.extend({
    * @type ArrayProxy
    */
 
-  tabs: null,
-
-  /**
-   * Creates the tabs ArrayProxy on init (otherwise would be shared by every
-   * instance)
-   *
-   * @private
-   */
-
-  createTabs: Ember.on('init', function() {
-    this.set('tabs', Ember.ArrayProxy.create({content: []}));
+  tabs: Ember.computed(function() {
+    return Ember.ArrayProxy.create({content: Ember.A()});
   }),
 
   /**
@@ -79,8 +70,6 @@ export default Ember.Component.extend({
 
   unregisterTab: function(tab) {
     var tabs = this.get('tabs');
-    var index = tab.get('index');
-    var parent = this.get('parentView');
     tabs.removeObject(tab);
   },
 

@@ -20,7 +20,9 @@ export default Ember.Component.extend({
    * @type ArrayProxy
    */
 
-  tabPanels: null,
+  tabPanels: Ember.computed(function() {
+    return Ember.ArrayProxy.create({content: Ember.A()});
+  }),
 
   /**
    * Set this to the tab you'd like to be active. Usually it is bound to a
@@ -32,17 +34,6 @@ export default Ember.Component.extend({
    */
 
   'selected-index': 0,
-
-  /**
-   * Creates the `tabPanels` ArrayProxy.
-   *
-   * @method createTabPanels
-   * @private
-   */
-
-  createTabPanelArray: Ember.on('init', function(tabList) {
-    this.set('tabPanels', Ember.ArrayProxy.create({content: []}));
-  }),
 
   /**
    * Selects a tab.

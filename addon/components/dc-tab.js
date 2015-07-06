@@ -105,7 +105,7 @@ export default Ember.Component.extend({
    * @type Boolean
    */
 
-  active: Ember.computed('tabs.activeTab', function(key, val) {
+  active: Ember.computed('tabs.activeTab', function() {
     return this.get('tabs.activeTab') === this;
   }),
 
@@ -160,7 +160,9 @@ export default Ember.Component.extend({
 
   selectFromTabsSelectedIndex: Ember.on('didInsertElement', Ember.observer('tabs.selected-index', function() {
     var activeTab = this.get('tabs.activeTab');
-    if (activeTab === this) return; // this was just selected
+    if (activeTab === this) {
+      return; // this was just selected
+    }
     var selectedIndex = this.get('tabs.selected-index');
     var index = parseInt(this.get('tabs.selected-index'), 10);
     var myIndex = this.get('index');
