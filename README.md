@@ -60,6 +60,8 @@ Usage
 - `dc-tab` must be an immediate child of `dc-tab-list`
 - `dc-tab-panel` must be an immediate child of `dc-tabs`
 
+Styles can be imported as 'dc-tabs' into your app style sheet.
+
 Options
 -------
 
