@@ -36,7 +36,7 @@ export default Component.extend({
     this.send('registerTabPanel', this);
   },
 
-  didInsertElement() {
+  willDestroyElement() {
     this.send('unregisterTabPanel', this);
   },
 
