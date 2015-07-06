@@ -12,6 +12,9 @@ export default Ember.Component.extend({
   // TODO: remove this, toggleVisibility won't fire w/o it though (?)
   classNameBindings: ['active'],
 
+  tabsComponent: Ember.computed.alias('parentView'),
+  target: Ember.computed.alias('tabsComponent'),
+
   /**
    * See http://www.w3.org/TR/wai-aria/roles#tabpanel
    *
@@ -31,7 +34,7 @@ export default Ember.Component.extend({
    * @private
    */
 
-  tabList: Ember.computed.alias('parentView.tabList'),
+  tabList: Ember.computed.alias('tabsComponent.tabList'),
 
   /**
    * Reference to the ArrayProxy of TabPanelComponent instances.
@@ -41,7 +44,7 @@ export default Ember.Component.extend({
    * @private
    */
 
-  tabPanels: Ember.computed.alias('parentView.tabPanels'),
+  tabPanels: Ember.computed.alias('tabsComponent.tabPanels'),
 
   /**
    * Tells screenreaders which tab labels this panel.
@@ -97,11 +100,11 @@ export default Ember.Component.extend({
    */
 
   registerWithTabs: Ember.on('willInsertElement', function() {
-    this.get('parentView').registerTabPanel(this);
+    this.send('registerTabPanel', this);
   }),
 
   unregisterWithTabs: Ember.on('willDestroyElement', function() {
-    this.get('parentView').unregisterTabPanel(this);
+    this.send('unregisterTabPanel', this);
   })
 
 });

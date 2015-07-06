@@ -47,31 +47,33 @@ export default Ember.Component.extend({
     this.set('selected-index', tabIndex);
   },
 
-  /**
-   * Registers the TabListComponent instance.
-   *
-   * @method registerTabList
-   * @private
-   */
 
-  registerTabList: function(tabList) {
-    this.set('tabList', tabList);
-  },
+  actions: {
+    /**
+     * Registers the TabListComponent instance.
+     *
+     * @method registerTabList
+     * @private
+     */
 
-  /**
-   * Registers TabPanelComponent instances so related components can access
-   * them.
-   *
-   * @method registerTabPanel
-   * @private
-   */
+    registerTabList: function(tabList) {
+      this.set('tabList', tabList);
+    },
 
-  registerTabPanel: function(tabPanel) {
-    this.get('tabPanels').addObject(tabPanel);
-  },
+    /**
+     * Registers TabPanelComponent instances so related components can access
+     * them.
+     *
+     * @method registerTabPanel
+     * @private
+     */
 
-  unregisterTabPanel: function(tabPanel) {
-    this.get('tabPanels').removeObject(tabPanel);
+    registerTabPanel: function(tabPanel) {
+      this.get('tabPanels').addObject(tabPanel);
+    },
+
+    unregisterTabPanel: function(tabPanel) {
+      this.get('tabPanels').removeObject(tabPanel);
+    }
   }
-
 });

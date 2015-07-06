@@ -9,6 +9,9 @@ export default Ember.Component.extend({
     'aria-multiselectable'
   ],
 
+  tabsComponent: Ember.computed.alias('parentView'),
+  target: Ember.computed.alias('tabsComponent'),
+
   /**
    * See http://www.w3.org/TR/wai-aria/roles#tablist
    *
@@ -33,7 +36,7 @@ export default Ember.Component.extend({
    * @property activeTab
    */
 
-  activeTab: Ember.computed.alias('parentView.activeTab'),
+  activeTab: Ember.computed.alias('tabsComponent.activeTab'),
 
   /**
    * Registers itself with the ic-tab component.
@@ -43,7 +46,7 @@ export default Ember.Component.extend({
    */
 
   registerWithTabs: Ember.on('willInsertElement', function() {
-    this.get('parentView').registerTabList(this);
+    this.send('registerTabList', this);
   }),
 
   /**
@@ -57,21 +60,6 @@ export default Ember.Component.extend({
     return Ember.ArrayProxy.create({content: Ember.A()});
   }),
 
-  /**
-   * Adds a tab to the tabs ArrayProxy.
-   *
-   * @method registerTab
-   * @private
-   */
-
-  registerTab: function(tab) {
-    this.get('tabs').addObject(tab);
-  },
-
-  unregisterTab: function(tab) {
-    var tabs = this.get('tabs');
-    tabs.removeObject(tab);
-  },
 
   /**
    * Sets up keyboard navigation.
@@ -139,6 +127,22 @@ export default Ember.Component.extend({
   selectTabAtIndex: function(index) {
     var tab = this.get('tabs').objectAt(index);
     tab.select({focus: true});
-  }
+  },
 
+  actions: {
+    /**
+     * Adds a tab to the tabs ArrayProxy.
+     *
+     * @method registerTab
+     * @private
+     */
+    registerTab: function(tab) {
+      this.get('tabs').addObject(tab);
+    },
+
+    unregisterTab: function(tab) {
+      var tabs = this.get('tabs');
+      tabs.removeObject(tab);
+    }
+  }
 });

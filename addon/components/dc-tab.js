@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
+
   tagName: 'dc-tab',
 
   attributeBindings: [
@@ -12,6 +13,8 @@ export default Ember.Component.extend({
     'tabindex',
     'selected'
   ],
+
+  target: Ember.computed.alias('tabList'),
 
   /**
    * See http://www.w3.org/TR/wai-aria/roles#tab
@@ -54,7 +57,7 @@ export default Ember.Component.extend({
    * @type TabsComponent
    */
 
-  tabs: Ember.computed.alias('parentView.parentView'),
+  tabs: Ember.computed.alias('tabList.tabsComponent'),
 
   /**
    * Reference to the parent TabListComponent instance.
@@ -179,11 +182,11 @@ export default Ember.Component.extend({
    */
 
   registerWithTabList: Ember.on('willInsertElement', function() {
-    this.get('tabList').registerTab(this);
+    this.send('registerTab', this);
   }),
 
   unregisterWithTabList: Ember.on('willDestroyElement', function() {
-    this.get('tabList').unregisterTab(this);
+    this.send('unregisterTab', this);
   })
 
 });
