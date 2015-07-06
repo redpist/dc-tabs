@@ -31,9 +31,9 @@ export default Ember.Component.extend({
    * @type Boolean
    */
 
-  selected: function() {
+  selected: Ember.computed('active', function() {
     return this.get('active') ? 'selected' : null;
-  }.property('active'),
+  }),
 
   /**
    * Makes the selected tab keyboard tabbable, also prevents tabs from getting
@@ -43,9 +43,9 @@ export default Ember.Component.extend({
    * @type Number
    */
 
-  tabindex: function() {
+  tabindex: Ember.computed('active', function() {
     return this.get('active') ? 0 : null;
-  }.property('active'),
+  }),
 
   /**
    * Reference to the parent TabsComponent instance.
@@ -83,10 +83,10 @@ export default Ember.Component.extend({
    * @private
    */
 
-  'aria-selected': function() {
+  'aria-selected': Ember.computed('active', function() {
     // coerce to ensure a "true" or "false" attribute value
     return this.get('active')+'';
-  }.property('active'),
+  }),
 
   /**
    * Tells screenreaders whether or not this tabs panel is expanded.
@@ -105,9 +105,9 @@ export default Ember.Component.extend({
    * @type Boolean
    */
 
-  active: function(key, val) {
+  active: Ember.computed('tabs.activeTab', function(key, val) {
     return this.get('tabs.activeTab') === this;
-  }.property('tabs.activeTab'),
+  }),
 
   /**
    * Selects this tab, bound to click.
@@ -117,14 +117,14 @@ export default Ember.Component.extend({
    *   @param {*} [options.focus] - focuses the element when selected.
    */
 
-  select: function(options) {
+  select: Ember.on('click', function(options) {
     this.get('tabs').select(this);
     if (options && options.focus) {
       Ember.run.schedule('afterRender', this, function() {
         this.$().focus();
       });
     }
-  }.on('click'),
+  }),
 
   /**
    * The index of this tab in the TabListComponent instance.
@@ -133,9 +133,9 @@ export default Ember.Component.extend({
    * @type Number
    */
 
-  index: function() {
+  index: Ember.computed('tabList.tabs.@each', function() {
     return this.get('tabList.tabs').indexOf(this);
-  }.property('tabList.tabs.@each'),
+  }),
 
   /**
    * Reference to the associated TabPanel instance.
@@ -144,11 +144,11 @@ export default Ember.Component.extend({
    * @type TabPanelComponent
    */
 
-  tabPanel: function() {
+  tabPanel: Ember.computed('tabs.tabPanels.@each', function() {
     var index = this.get('index');
     var panels = this.get('tabs.tabPanels');
     return panels && panels.objectAt(index);
-  }.property('tabs.tabPanels.@each'),
+  }),
 
   /**
    * Selects this tab when the TabsComponent selected-index property matches
@@ -158,7 +158,7 @@ export default Ember.Component.extend({
    * @private
    */
 
-  selectFromTabsSelectedIndex: function() {
+  selectFromTabsSelectedIndex: Ember.on('didInsertElement', Ember.observer('tabs.selected-index', function() {
     var activeTab = this.get('tabs.activeTab');
     if (activeTab === this) return; // this was just selected
     var selectedIndex = this.get('tabs.selected-index');
@@ -167,7 +167,7 @@ export default Ember.Component.extend({
     if (index === myIndex || (this.get('custom-index') && this.get('custom-index') === selectedIndex)) {
       this.select();
     }
-  }.observes('tabs.selected-index').on('didInsertElement'),
+  })),
 
   /**
    * Registers this tab with the TabListComponent instance.
@@ -176,12 +176,12 @@ export default Ember.Component.extend({
    * @private
    */
 
-  registerWithTabList: function() {
+  registerWithTabList: Ember.on('willInsertElement', function() {
     this.get('tabList').registerTab(this);
-  }.on('willInsertElement'),
+  }),
 
-  unregisterWithTabList: function() {
+  unregisterWithTabList: Ember.on('willDestroyElement', function() {
     this.get('tabList').unregisterTab(this);
-  }.on('willDestroyElement')
+  })
 
 });

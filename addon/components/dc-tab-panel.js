@@ -60,11 +60,11 @@ export default Ember.Component.extend({
    * @type TabComponent
    */
 
-  tab: function() {
+  tab: Ember.computed('tabList.tabs.@each', 'tabPanels.@each', function() {
     var index = this.get('tabPanels').indexOf(this);
     var tabs = this.get('tabList.tabs');
     return tabs && tabs.objectAt(index);
-  }.property('tabList.tabs.@each', 'tabPanels.@each'),
+  }),
 
   /**
    * Tells whether or not this panel is active.
@@ -73,9 +73,9 @@ export default Ember.Component.extend({
    * @type Boolean
    */
 
-  active: function() {
+  active: Ember.computed('tab.active', function() {
     return this.get('tab.active');
-  }.property('tab.active'),
+  }),
 
   /**
    * Shows or hides this panel depending on whether or not its active.
@@ -84,10 +84,10 @@ export default Ember.Component.extend({
    * @private
    */
 
-  toggleVisibility: function() {
+  toggleVisibility: Ember.observer('active', function() {
     var display = this.get('active') ? '' : 'none';
     this.$().css('display', display);
-  }.observes('active'),
+  }),
 
   /**
    * Registers with the TabsComponent.
@@ -96,12 +96,12 @@ export default Ember.Component.extend({
    * @private
    */
 
-  registerWithTabs: function() {
+  registerWithTabs: Ember.on('willInsertElement', function() {
     this.get('parentView').registerTabPanel(this);
-  }.on('willInsertElement'),
+  }),
 
-  unregisterWithTabs: function() {
+  unregisterWithTabs: Ember.on('willDestroyElement', function() {
     this.get('parentView').unregisterTabPanel(this);
-  }.on('willDestroyElement')
+  })
 
 });

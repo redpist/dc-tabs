@@ -42,9 +42,9 @@ export default Ember.Component.extend({
    * @private
    */
 
-  registerWithTabs: function() {
+  registerWithTabs: Ember.on('willInsertElement', function() {
     this.get('parentView').registerTabList(this);
-  }.on('willInsertElement'),
+  }),
 
   /**
    * Storage for all tab components, facilitating keyboard navigation.
@@ -62,9 +62,9 @@ export default Ember.Component.extend({
    * @private
    */
 
-  createTabs: function() {
+  createTabs: Ember.on('init', function() {
     this.set('tabs', Ember.ArrayProxy.create({content: []}));
-  }.on('init'),
+  }),
 
   /**
    * Adds a tab to the tabs ArrayProxy.
@@ -91,7 +91,7 @@ export default Ember.Component.extend({
    * @private
    */
 
-  navigateOnKeyDown: function(event) {
+  navigateOnKeyDown: Ember.on('keyDown', function(event) {
     var key = event.keyCode;
     if (key === 37 /*<*/ || key === 38 /*^*/) {
       this.selectPrevious();
@@ -101,7 +101,7 @@ export default Ember.Component.extend({
       return;
     }
     event.preventDefault();
-  }.on('keyDown'),
+  }),
 
   /**
    * Tracks the index of the active tab so we can select previous/next.
@@ -110,9 +110,9 @@ export default Ember.Component.extend({
    * @type Number
    */
 
-  activeTabIndex: function() {
+  activeTabIndex: Ember.computed('activeTab', function() {
     return this.get('tabs').indexOf(this.get('activeTab'));
-  }.property('activeTab'),
+  }),
 
   /**
    * Selects the next tab in the list, or loops to the beginning.

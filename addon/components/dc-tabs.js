@@ -40,9 +40,9 @@ export default Ember.Component.extend({
    * @private
    */
 
-  createTabPanelArray: function(tabList) {
+  createTabPanelArray: Ember.on('init', function(tabList) {
     this.set('tabPanels', Ember.ArrayProxy.create({content: []}));
-  }.on('init'),
+  }),
 
   /**
    * Selects a tab.
