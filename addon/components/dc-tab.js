@@ -1,6 +1,21 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const {
+  Component,
+  computed,
+  observer,
+  on
+} = Ember;
+
+const {
+  alias
+} = Ember.computed;
+
+const {
+  schedule
+} = Ember.run;
+
+export default Component.extend({
 
   tagName: 'dc-tab',
 
@@ -13,24 +28,24 @@ export default Ember.Component.extend({
     'selected'
   ],
 
-  target: Ember.computed.alias('tabList'),
+  target: alias('tabList'),
   role: 'tab',
 
-  selected: Ember.computed('active', function() {
+  selected: computed('active', function() {
     return this.get('active') ? 'selected' : null;
   }),
 
-  tabindex: Ember.computed('active', function() {
+  tabindex: computed('active', function() {
     return this.get('active') ? 0 : null;
   }),
 
-  tabs: Ember.computed.alias('tabList.tabsComponent'),
-  tabList: Ember.computed.alias('parentView'),
-  'aria-controls': Ember.computed.alias('tabPanel.elementId'),
-  'aria-selected': Ember.computed('active', function() {
+  tabs: alias('tabList.tabsComponent'),
+  tabList: alias('parentView'),
+  'aria-controls': alias('tabPanel.elementId'),
+  'aria-selected': computed('active', function() {
     return this.get('active').toString();
   }),
-  'aria-expanded': Ember.computed.alias('aria-selected'),
+  'aria-expanded': alias('aria-selected'),
 
   willInsertElement() {
     this.send('registerTab', this);
@@ -44,30 +59,30 @@ export default Ember.Component.extend({
     this.send('unregisterTab', this);
   },
 
-  active: Ember.computed('tabs.activeTab', function() {
+  active: computed('tabs.activeTab', function() {
     return this.get('tabs.activeTab') === this;
   }),
 
-  select: Ember.on('click', function(options) {
+  select: on('click', function(options) {
     this.get('tabs').select(this);
     if (options && options.focus) {
-      Ember.run.schedule('afterRender', this, function() {
+      schedule('afterRender', this, function() {
         this.$().focus();
       });
     }
   }),
 
-  index: Ember.computed('tabList.tabs.@each', function() {
+  index: computed('tabList.tabs.@each', function() {
     return this.get('tabList.tabs').indexOf(this);
   }),
 
-  tabPanel: Ember.computed('tabs.tabPanels.@each', function() {
+  tabPanel: computed('tabs.tabPanels.@each', function() {
     const index = this.get('index');
     const panels = this.get('tabs.tabPanels');
     return panels && panels.objectAt(index);
   }),
 
-  selectFromTabsSelectedIndex: Ember.observer('tabs.selected-index', function() {
+  selectFromTabsSelectedIndex: observer('tabs.selected-index', function() {
     const activeTab = this.get('tabs.activeTab');
     if (activeTab === this) {
       return; // this was just selected

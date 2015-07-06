@@ -1,7 +1,16 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const {
+  Component,
+  computed,
+  observer
+} = Ember;
 
+const {
+  alias
+} = Ember.computed;
+
+export default Component.extend({
   tagName: 'dc-tab-panel',
 
   attributeBindings: [
@@ -12,16 +21,16 @@ export default Ember.Component.extend({
   // TODO: remove this, toggleVisibility won't fire w/o it though (?)
   classNameBindings: ['active'],
 
-  tabsComponent: Ember.computed.alias('parentView'),
-  target: Ember.computed.alias('tabsComponent'),
+  tabsComponent: alias('parentView'),
+  target: alias('tabsComponent'),
 
   role: 'tabpanel',
 
-  tabList: Ember.computed.alias('tabsComponent.tabList'),
+  tabList: alias('tabsComponent.tabList'),
 
-  tabPanels: Ember.computed.alias('tabsComponent.tabPanels'),
+  tabPanels: alias('tabsComponent.tabPanels'),
 
-  'aria-labeledby': Ember.computed.alias('tab.elementId'),
+  'aria-labeledby': alias('tab.elementId'),
 
   willInsertElement() {
     this.send('registerTabPanel', this);
@@ -31,17 +40,17 @@ export default Ember.Component.extend({
     this.send('unregisterTabPanel', this);
   },
 
-  tab: Ember.computed('tabList.tabs.@each', 'tabPanels.@each', function() {
+  tab: computed('tabList.tabs.@each', 'tabPanels.@each', function() {
     const index = this.get('tabPanels').indexOf(this);
     const tabs = this.get('tabList.tabs');
     return tabs && tabs.objectAt(index);
   }),
 
-  active: Ember.computed('tab.active', function() {
+  active: computed('tab.active', function() {
     return this.get('tab.active');
   }),
 
-  toggleVisibility: Ember.observer('active', function() {
+  toggleVisibility: observer('active', function() {
     const display = this.get('active') ? '' : 'none';
     this.$().css('display', display);
   })

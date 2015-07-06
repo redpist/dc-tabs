@@ -1,7 +1,18 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const {
+  A,
+  ArrayProxy,
+  Component,
+  computed,
+  on
+} = Ember;
 
+const {
+  alias
+} = Ember.computed;
+
+export default Component.extend({
   tagName: 'dc-tab-list',
 
   attributeBindings: [
@@ -9,26 +20,26 @@ export default Ember.Component.extend({
     'aria-multiselectable'
   ],
 
-  tabsComponent: Ember.computed.alias('parentView'),
-  target: Ember.computed.alias('tabsComponent'),
+  tabsComponent: alias('parentView'),
+  target: alias('tabsComponent'),
 
   role: 'tablist',
 
   'aria-multiselectable': false,
 
-  activeTab: Ember.computed.alias('tabsComponent.activeTab'),
+  activeTab: alias('tabsComponent.activeTab'),
 
   willInsertElement() {
     this.send('registerTabList', this);
   },
 
-  tabs: Ember.computed(function() {
-    return Ember.ArrayProxy.create({
-      content: Ember.A()
+  tabs: computed(function() {
+    return ArrayProxy.create({
+      content: new A()
     });
   }),
 
-  navigateOnKeyDown: Ember.on('keyDown', function(event) {
+  navigateOnKeyDown: on('keyDown', function(event) {
     const  key = event.keyCode;
     if (key === 37 /*<*/ || key === 38 /*^*/) {
       this.selectPrevious();
@@ -40,7 +51,7 @@ export default Ember.Component.extend({
     event.preventDefault();
   }),
 
-  activeTabIndex: Ember.computed('activeTab', function() {
+  activeTabIndex: computed('activeTab', function() {
     return this.get('tabs').indexOf(this.get('activeTab'));
   }),
 

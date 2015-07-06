@@ -1,13 +1,20 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const {
+  A,
+  ArrayProxy,
+  Component,
+  computed
+} = Ember;
+
+export default Component.extend({
   tagName: 'dc-tabs',
   activeTab: null,
   'selected-index': 0,
 
-  tabPanels: Ember.computed(function() {
-    return Ember.ArrayProxy.create({
-      content: Ember.A()
+  tabPanels: computed(function() {
+    return ArrayProxy.create({
+      content: new A()
     });
   }),
 
