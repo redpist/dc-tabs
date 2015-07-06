@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-
   tagName: 'dc-tab',
 
   attributeBindings: [
@@ -25,13 +24,11 @@ export default Ember.Component.extend({
     return this.get('active') ? 0 : null;
   }),
 
-
   tabs: Ember.computed.alias('tabList.tabsComponent'),
   tabList: Ember.computed.alias('parentView'),
   'aria-controls': Ember.computed.alias('tabPanel.elementId'),
   'aria-selected': Ember.computed('active', function() {
-    // coerce to ensure a "true" or "false" attribute value
-    return this.get('active')+'';
+    return this.get('active').toString();
   }),
   'aria-expanded': Ember.computed.alias('aria-selected'),
 
@@ -65,19 +62,19 @@ export default Ember.Component.extend({
   }),
 
   tabPanel: Ember.computed('tabs.tabPanels.@each', function() {
-    var index = this.get('index');
-    var panels = this.get('tabs.tabPanels');
+    const index = this.get('index');
+    const panels = this.get('tabs.tabPanels');
     return panels && panels.objectAt(index);
   }),
 
   selectFromTabsSelectedIndex: Ember.observer('tabs.selected-index', function() {
-    var activeTab = this.get('tabs.activeTab');
+    const activeTab = this.get('tabs.activeTab');
     if (activeTab === this) {
       return; // this was just selected
     }
-    var selectedIndex = this.get('tabs.selected-index');
-    var index = parseInt(this.get('tabs.selected-index'), 10);
-    var myIndex = this.get('index');
+    const selectedIndex = this.get('tabs.selected-index');
+    const index = parseInt(this.get('tabs.selected-index'), 10);
+    const myIndex = this.get('index');
     if (index === myIndex || (this.get('custom-index') && this.get('custom-index') === selectedIndex)) {
       this.select();
     }

@@ -6,26 +6,27 @@ export default Ember.Component.extend({
   'selected-index': 0,
 
   tabPanels: Ember.computed(function() {
-    return Ember.ArrayProxy.create({content: Ember.A()});
+    return Ember.ArrayProxy.create({
+      content: Ember.A()
+    });
   }),
 
-  select: function(tab) {
-    var tabIndex = tab.get('custom-index') || tab.get('index');
+  select(tab) {
+    const tabIndex = tab.get('custom-index') || tab.get('index');
     this.set('activeTab', tab);
     this.set('selected-index', tabIndex);
   },
 
-
   actions: {
-    registerTabList: function(tabList) {
+    registerTabList(tabList) {
       this.set('tabList', tabList);
     },
 
-    registerTabPanel: function(tabPanel) {
+    registerTabPanel(tabPanel) {
       this.get('tabPanels').addObject(tabPanel);
     },
 
-    unregisterTabPanel: function(tabPanel) {
+    unregisterTabPanel(tabPanel) {
       this.get('tabPanels').removeObject(tabPanel);
     }
   }

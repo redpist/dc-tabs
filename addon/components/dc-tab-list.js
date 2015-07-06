@@ -23,11 +23,13 @@ export default Ember.Component.extend({
   },
 
   tabs: Ember.computed(function() {
-    return Ember.ArrayProxy.create({content: Ember.A()});
+    return Ember.ArrayProxy.create({
+      content: Ember.A()
+    });
   }),
 
   navigateOnKeyDown: Ember.on('keyDown', function(event) {
-    var key = event.keyCode;
+    const  key = event.keyCode;
     if (key === 37 /*<*/ || key === 38 /*^*/) {
       this.selectPrevious();
     } else if (key === 39 /*>*/ || key === 40 /*v*/) {
@@ -42,29 +44,33 @@ export default Ember.Component.extend({
     return this.get('tabs').indexOf(this.get('activeTab'));
   }),
 
-  selectNext: function() {
-    var index = this.get('activeTabIndex') + 1;
-    if (index === this.get('tabs.length')) { index = 0; }
+  selectNext() {
+    let index = this.get('activeTabIndex') + 1;
+    if (index === this.get('tabs.length')) {
+      index = 0;
+    }
     this.selectTabAtIndex(index);
   },
 
-  selectPrevious: function() {
-    var index = this.get('activeTabIndex') - 1;
-    if (index === -1) { index = this.get('tabs.length') - 1; }
+  selectPrevious() {
+    let index = this.get('activeTabIndex') - 1;
+    if (index === -1) {
+      index = this.get('tabs.length') - 1;
+    }
     this.selectTabAtIndex(index);
   },
 
-  selectTabAtIndex: function(index) {
-    var tab = this.get('tabs').objectAt(index);
-    tab.select({focus: true});
+  selectTabAtIndex(index) {
+    const tab = this.get('tabs').objectAt(index);
+    tab.select({ focus: true });
   },
 
   actions: {
-    registerTab: function(tab) {
+    registerTab(tab) {
       this.get('tabs').addObject(tab);
     },
 
-    unregisterTab: function(tab) {
+    unregisterTab(tab) {
       this.get('tabs').removeObject(tab);
     }
   }

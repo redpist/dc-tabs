@@ -32,8 +32,8 @@ export default Ember.Component.extend({
   },
 
   tab: Ember.computed('tabList.tabs.@each', 'tabPanels.@each', function() {
-    var index = this.get('tabPanels').indexOf(this);
-    var tabs = this.get('tabList.tabs');
+    const index = this.get('tabPanels').indexOf(this);
+    const tabs = this.get('tabList.tabs');
     return tabs && tabs.objectAt(index);
   }),
 
@@ -42,7 +42,7 @@ export default Ember.Component.extend({
   }),
 
   toggleVisibility: Ember.observer('active', function() {
-    var display = this.get('active') ? '' : 'none';
+    const display = this.get('active') ? '' : 'none';
     this.$().css('display', display);
   })
 });

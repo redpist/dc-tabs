@@ -1,4 +1,4 @@
-import Ember from "ember";
+import Ember from 'ember';
 import { test, moduleForComponent } from 'ember-qunit';
 
 // moduleForComponent('pretty-color');
