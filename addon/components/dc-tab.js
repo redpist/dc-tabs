@@ -35,6 +35,18 @@ export default Ember.Component.extend({
   }),
   'aria-expanded': Ember.computed.alias('aria-selected'),
 
+  willInsertElement() {
+    this.send('registerTab', this);
+  },
+
+  didInsertElement() {
+    this.selectFromTabsSelectedIndex();
+  },
+
+  willDestroyElement() {
+    this.send('unregisterTab', this);
+  },
+
   active: Ember.computed('tabs.activeTab', function() {
     return this.get('tabs.activeTab') === this;
   }),
@@ -58,7 +70,7 @@ export default Ember.Component.extend({
     return panels && panels.objectAt(index);
   }),
 
-  selectFromTabsSelectedIndex: Ember.on('didInsertElement', Ember.observer('tabs.selected-index', function() {
+  selectFromTabsSelectedIndex: Ember.observer('tabs.selected-index', function() {
     var activeTab = this.get('tabs.activeTab');
     if (activeTab === this) {
       return; // this was just selected
@@ -69,14 +81,5 @@ export default Ember.Component.extend({
     if (index === myIndex || (this.get('custom-index') && this.get('custom-index') === selectedIndex)) {
       this.select();
     }
-  })),
-
-  registerWithTabList: Ember.on('willInsertElement', function() {
-    this.send('registerTab', this);
-  }),
-
-  unregisterWithTabList: Ember.on('willDestroyElement', function() {
-    this.send('unregisterTab', this);
   })
-
 });

@@ -23,6 +23,14 @@ export default Ember.Component.extend({
 
   'aria-labeledby': Ember.computed.alias('tab.elementId'),
 
+  willInsertElement() {
+    this.send('registerTabPanel', this);
+  },
+
+  didInsertElement() {
+    this.send('unregisterTabPanel', this);
+  },
+
   tab: Ember.computed('tabList.tabs.@each', 'tabPanels.@each', function() {
     var index = this.get('tabPanels').indexOf(this);
     var tabs = this.get('tabList.tabs');
@@ -36,14 +44,5 @@ export default Ember.Component.extend({
   toggleVisibility: Ember.observer('active', function() {
     var display = this.get('active') ? '' : 'none';
     this.$().css('display', display);
-  }),
-
-  registerWithTabs: Ember.on('willInsertElement', function() {
-    this.send('registerTabPanel', this);
-  }),
-
-  unregisterWithTabs: Ember.on('willDestroyElement', function() {
-    this.send('unregisterTabPanel', this);
   })
-
 });
