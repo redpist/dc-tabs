@@ -15,7 +15,8 @@ export default Component.extend({
 
   attributeBindings: [
     'role',
-    'aria-labeledby'
+    'aria-labeledby',
+    'display'
   ],
 
   // TODO: remove this, toggleVisibility won't fire w/o it though (?)
@@ -49,9 +50,7 @@ export default Component.extend({
   active: computed('tab.active', function() {
     return this.get('tab.active');
   }),
-
-  toggleVisibility: observer('active', function() {
-    const display = this.get('active') ? '' : 'none';
-    this.$().css('display', display);
+  display: computed('active', function() {
+    return = this.get('active') ? '' : 'none';
   })
 });
