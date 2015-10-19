@@ -40,7 +40,7 @@ export default Component.extend({
     this.send('unregisterTabPanel', this);
   },
 
-  tab: computed('tabList.tabs.@each', 'tabPanels.@each', function() {
+  tab: computed('tabList.tabs.[]', 'tabPanels.[]]', function() {
     const index = this.get('tabPanels').indexOf(this);
     const tabs = this.get('tabList.tabs');
     return tabs && tabs.objectAt(index);

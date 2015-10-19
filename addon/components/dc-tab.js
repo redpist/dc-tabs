@@ -72,11 +72,11 @@ export default Component.extend({
     }
   }),
 
-  index: computed('tabList.tabs.@each', function() {
+  index: computed('tabList.tabs.[]', function() {
     return this.get('tabList.tabs').indexOf(this);
   }),
 
-  tabPanel: computed('tabs.tabPanels.@each', function() {
+  tabPanel: computed('tabs.tabPanels.[]', function() {
     const index = this.get('index');
     const panels = this.get('tabs.tabPanels');
     return panels && panels.objectAt(index);
