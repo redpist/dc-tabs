@@ -51,6 +51,6 @@ export default Component.extend({
     return this.get('tab.active');
   }),
   display: computed('active', function() {
-    return = this.get('active') ? '' : 'none';
+    return this.get('active') ? '' : 'none';
   })
 });
