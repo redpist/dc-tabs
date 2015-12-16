@@ -10,32 +10,7 @@ const {
 export default Component.extend({
   tagName: 'dc-tabs',
   activeTab: null,
-  selectedIndex: 0,
-  'selected-index': Ember.computed(
-    'selectedIndex',
-    'tabPanels.[]',
-    'tabPanels.@each.custom-index',
-    {
-      set(key, value) {
-        this.set('selectedIndex', value)
-        return value
-      },
-      get(key) {
-        const selectedIndex = this.get('selectedIndex');
-        const index = parseInt(this.get('selectedIndex'), 10);
-
-        const selected = this.get('tabPanels').find(
-          function (item, myIndex, enumerable) {
-            return (index === myIndex) || (item.get('custom-index') && item.get('custom-index') === selectedIndex);
-          }
-        );
-        if (Ember.isNone(selected)) {
-          return 0;
-        }
-        return selectedIndex;
-      }
-    }
-  ),
+  'selected-index': 0,
 
   tabPanels: computed(function() {
     return ArrayProxy.create({

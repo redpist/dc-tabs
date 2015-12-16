@@ -82,7 +82,7 @@ export default Component.extend({
     return panels && panels.objectAt(index);
   }),
 
-  selectFromTabsSelectedIndex: observer('tabs.selected-index', 'custom-index', function() {
+  selectFromTabsSelectedIndex: observer('tabs.selected-index', function() {
     const activeTab = this.get('tabs.activeTab');
     if (activeTab === this) {
       return; // this was just selected
@@ -90,7 +90,6 @@ export default Component.extend({
     const selectedIndex = this.get('tabs.selected-index');
     const index = parseInt(this.get('tabs.selected-index'), 10);
     const myIndex = this.get('index');
-
     if (index === myIndex || (this.get('custom-index') && this.get('custom-index') === selectedIndex)) {
       this.select();
     }
