@@ -15,7 +15,7 @@ export default Component.extend({
 
   attributeBindings: [
     'role',
-    'aria-labeledby'    
+    'aria-labeledby'
   ],
 
   // TODO: remove this, toggleVisibility won't fire w/o it though (?)
@@ -36,12 +36,12 @@ export default Component.extend({
     this.send('registerTabPanel', this);
   },
 
-  willDestroyElement() {
-    this.send('unregisterTabPanel', this);
-  },
-
   tab: computed('tabList.tabs.[]', 'tabPanels.[]', function() {
-    const index = this.get('tabPanels').indexOf(this);
+    var tabPanels = this.get('tabPanels');
+    if (tabPanels === null) {
+      return false;
+    }
+    const index = tabPanels.indexOf(this);
     const tabs = this.get('tabList.tabs');
     return tabs && tabs.objectAt(index);
   }),

@@ -55,10 +55,6 @@ export default Component.extend({
     this.selectFromTabsSelectedIndex();
   },
 
-  willDestroyElement() {
-    this.send('unregisterTab', this);
-  },
-
   active: computed('tabs.activeTab', function() {
     return this.get('tabs.activeTab') === this;
   }),

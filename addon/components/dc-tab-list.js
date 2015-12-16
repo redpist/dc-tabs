@@ -81,8 +81,5 @@ export default Component.extend({
       this.get('tabs').addObject(tab);
     },
 
-    unregisterTab(tab) {
-      this.get('tabs').removeObject(tab);
-    }
   }
 });

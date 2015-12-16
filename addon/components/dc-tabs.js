@@ -33,8 +33,5 @@ export default Component.extend({
       this.get('tabPanels').addObject(tabPanel);
     },
 
-    unregisterTabPanel(tabPanel) {
-      this.get('tabPanels').removeObject(tabPanel);
-    }
   }
 });
